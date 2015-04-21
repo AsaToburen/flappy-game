@@ -13,31 +13,14 @@ var BirdGraphicsComponent = function(entity) {
   this.entity = entity;
 };
 
-BirdGraphicsComponent.prototype.draw = function(context) {
-  //context.beginPath();
-  //context.arc(200, 80, 50, 0, 2 * Math.PI);
-  context.fillStyle = '#455A64';
-  //context.fill();
-
-  context.beginPath();
-  context.fillRect(500, 50, 340, 300);
-  context.fillStyle = '#C2185B';
-  context.stroke();
-
-
-      var rectangle = new Path2D();
-    rectangle.rect(200, 200, 50, 50);
-
-    var circle = new Path2D();
-    context.fillStyle = 'green';
-    circle.moveTo(125, 35);
-    circle.arc(100, 35, 25, 0, 2 * Math.PI);
-
-    context.stroke(rectangle);
-    context.fill(circle);
-
-
-
+BirdGraphicsComponent.prototype.draw = function(context, position, size) {
+    context.save();
+    context.translate(0, 1);
+    context.scale(size, size);
+    context.beginPath();
+    context.arc(0, 0, 1, 0, 2 * Math.PI);
+    context.fill();
+    context.restore();
 };
 
 
@@ -93,6 +76,9 @@ FlappyBird.prototype.run = function() {
     this.graphics.run();
 };
 
+
+
+
 exports.FlappyBird = FlappyBird;
 },{"./entities/bird":4,"./entities/pipe":5,"./systems/graphics":7}],7:[function(require,module,exports){
 var GraphicsSystem = function(entities) {
@@ -119,15 +105,22 @@ GraphicsSystem.prototype.tick = function() {
   // Clear the canvas
   this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+  this.context.save();
+  this.context.translate(this.canvas.width / 2, this.canvas.height);
+  this.context.scale(this.canvas.height, -this.canvas.height);
+
+
   //Rendering goes here
   for (var i = 0; i < this.entities.length; i++) {
     var entity = this.entities[i];
     if (!'graphics' in entity.components) {
       continue;
     }
-
     entity.components.graphics.draw(this.context);
   }
+
+  this.context.restore();
+
   window.requestAnimationFrame(this.tick.bind(this));
 };
 

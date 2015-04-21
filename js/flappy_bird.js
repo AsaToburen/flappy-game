@@ -11,4 +11,7 @@ FlappyBird.prototype.run = function() {
     this.graphics.run();
 };
 
+
+
+
 exports.FlappyBird = FlappyBird;
