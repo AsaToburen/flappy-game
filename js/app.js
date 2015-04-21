@@ -10,14 +10,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 },{"./flappy_bird":6}],2:[function(require,module,exports){
 var BirdGraphicsComponent = function(entity) {
-    this.entity = entity;
+  this.entity = entity;
 };
 
-BirdGraphicsComponent.prototype.draw = function() {
-    console.log('Drawing a bird');
+BirdGraphicsComponent.prototype.draw = function(context) {
+  //context.beginPath();
+  //context.arc(200, 80, 50, 0, 2 * Math.PI);
+  context.fillStyle = '#455A64';
+  //context.fill();
+
+  context.beginPath();
+  context.fillRect(500, 50, 340, 300);
+  context.fillStyle = '#C2185B';
+  context.stroke();
+
+
+      var rectangle = new Path2D();
+    rectangle.rect(200, 200, 50, 50);
+
+    var circle = new Path2D();
+    context.fillStyle = 'green';
+    circle.moveTo(125, 35);
+    circle.arc(100, 35, 25, 0, 2 * Math.PI);
+
+    context.stroke(rectangle);
+    context.fill(circle);
+
+
+
 };
+
 
 exports.BirdGraphicsComponent = BirdGraphicsComponent;
+
 },{}],3:[function(require,module,exports){
 var PipeGraphicsComponent = function(entity) {
     this.entity = entity;
@@ -71,26 +96,41 @@ FlappyBird.prototype.run = function() {
 exports.FlappyBird = FlappyBird;
 },{"./entities/bird":4,"./entities/pipe":5,"./systems/graphics":7}],7:[function(require,module,exports){
 var GraphicsSystem = function(entities) {
-    this.entities = entities;
+  this.entities = entities;
+  //Canvas is where we draw
+  this.canvas = document.getElementById('main-canvas');
+  //Context is what we draw to
+  this.context = this.canvas.getContext('2d');
 };
 
 GraphicsSystem.prototype.run = function() {
-    // Tick the graphics system a few times to see it in action
-    for (var i=0; i<5; i++) {
-        this.tick();
-    }
+  // Run the render loop
+  window.requestAnimationFrame(this.tick.bind(this));
 };
 
 GraphicsSystem.prototype.tick = function() {
-    for (var i=0; i<this.entities.length; i++) {
-        var entity = this.entities[i];
-        if (!'graphics' in entity.components) {
-            continue;
-        }
+  // set the canvas to the correct size if the window is resized
+  if (this.canvas.width != this.canvas.offsetWidth ||
+    this.canvas.height != this.canvas.offsetHeight) {
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight;
+  }
 
-        entity.components.graphics.draw(this.context);
+  // Clear the canvas
+  this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+  //Rendering goes here
+  for (var i = 0; i < this.entities.length; i++) {
+    var entity = this.entities[i];
+    if (!'graphics' in entity.components) {
+      continue;
     }
+
+    entity.components.graphics.draw(this.context);
+  }
+  window.requestAnimationFrame(this.tick.bind(this));
 };
 
 exports.GraphicsSystem = GraphicsSystem;
+
 },{}]},{},[1]);

@@ -65,7 +65,7 @@ gulp.task('images', function() {
 
 // Watch task
 gulp.task('watch', function() {
-  gulp.watch(['js/**/*.js', 'js/*.js']);
+  gulp.watch(['js/**/*.js', 'js/*.js'], ['scripts']);
   gulp.watch('scss/*.scss', ['sass']);
 });
 
