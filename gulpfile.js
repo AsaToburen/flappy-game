@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+ var gulp = require('gulp');
 
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
@@ -14,8 +14,8 @@ var buffer = require('vinyl-buffer');
 // JavaScript linting task
 //gulp.task('jshint', function() {
 //  return gulp.src(['js/**/*.js', 'js/*.js'])
-//    .pipe(jshint())
-//    .pipe(jshint.reporter('default'));
+//    .pipe(jshint());
+//    
 //});
 
 // Compile Sass task

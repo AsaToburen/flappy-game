@@ -1,7 +1,6 @@
 var physicsComponent = require("../components/physics/physics");
 var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
-var settings = require("../settings");
 
 var Bird = function() {
     var physics = new physicsComponent.PhysicsComponent(this);

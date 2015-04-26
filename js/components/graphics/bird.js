@@ -1,5 +1,6 @@
 var BirdGraphicsComponent = function(entity) {
   this.entity = entity;
+  this.radius = 0.02;
 };
 
 BirdGraphicsComponent.prototype.draw = function(context) {

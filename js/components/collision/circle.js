@@ -1,3 +1,5 @@
+var util = require('../../util');
+
 var CircleCollisionComponent = function(entity, radius) {
     this.entity = entity;
     this.radius = radius;
