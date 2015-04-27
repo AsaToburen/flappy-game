@@ -138,7 +138,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
   context.translate(position.x, position.y);
   var img = new Image();
   img.src = "images/bird_sprite.png";
-  context.drawImage(img, 0, 0, 90, 100, -.3, .2, .089, .1);
+  context.drawImage(img, 0, 0, 90, 90, -0.3, .2, .1, .1);
   //context.drawImage(img, 92, 0, 90, 100, .2, .2, .089, .1);
   //context.drawImage(img, 185, 0, 90, 100, .2, .2, .089, .1);
   context.restore();
@@ -159,7 +159,6 @@ PipeGraphicsComponent.prototype.draw = function(context) {
   context.translate(position.x, position.y);
   var img = new Image();
   img.src = "./images/pipe.png";
-
   context.drawImage(img, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
   context.restore();
 };

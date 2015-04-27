@@ -10,7 +10,6 @@ PipeGraphicsComponent.prototype.draw = function(context) {
   context.translate(position.x, position.y);
   var img = new Image();
   img.src = "./images/pipe.png";
-
   context.drawImage(img, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
   context.restore();
 };
