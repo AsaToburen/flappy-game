@@ -8,10 +8,11 @@ BirdGraphicsComponent.prototype.draw = function(context) {
 
   context.save();
   context.translate(position.x, position.y);
-  context.beginPath();
-  context.arc(0, 0, 0.02, 0, 2 * Math.PI);
-  context.fill();
-  context.closePath();
+  var img = new Image();
+  img.src = "images/bird_sprite.png";
+  context.drawImage(img, 0, 0, 90, 100, -.3, .2, .089, .1);
+  //context.drawImage(img, 92, 0, 90, 100, .2, .2, .089, .1);
+  //context.drawImage(img, 185, 0, 90, 100, .2, .2, .089, .1);
   context.restore();
 };
 

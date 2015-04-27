@@ -136,10 +136,11 @@ BirdGraphicsComponent.prototype.draw = function(context) {
 
   context.save();
   context.translate(position.x, position.y);
-  context.beginPath();
-  context.arc(0, 0, 0.02, 0, 2 * Math.PI);
-  context.fill();
-  context.closePath();
+  var img = new Image();
+  img.src = "images/bird_sprite.png";
+  context.drawImage(img, 0, 0, 90, 100, -.3, .2, .089, .1);
+  //context.drawImage(img, 92, 0, 90, 100, .2, .2, .089, .1);
+  //context.drawImage(img, 185, 0, 90, 100, .2, .2, .089, .1);
   context.restore();
 };
 
@@ -156,12 +157,11 @@ PipeGraphicsComponent.prototype.draw = function(context) {
 
   context.save();
   context.translate(position.x, position.y);
-  context.beginPath();
-  context.rect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-  context.fill();
-  context.closePath();
-  context.restore();
+  var img = new Image();
+  img.src = "./images/pipe.png";
 
+  context.drawImage(img, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+  context.restore();
 };
 
 

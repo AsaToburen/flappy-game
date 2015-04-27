@@ -70,7 +70,7 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['sass', 'scripts', 'watch']);
+gulp.task('default', ['sass', 'scripts', 'images', 'watch']);
 
 // Build task
 gulp.task('build', ['jshint', 'sass', 'html', 'scripts', 'styles', 'images']);

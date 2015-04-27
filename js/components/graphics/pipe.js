@@ -8,12 +8,11 @@ PipeGraphicsComponent.prototype.draw = function(context) {
 
   context.save();
   context.translate(position.x, position.y);
-  context.beginPath();
-  context.rect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
-  context.fill();
-  context.closePath();
-  context.restore();
+  var img = new Image();
+  img.src = "./images/pipe.png";
 
+  context.drawImage(img, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+  context.restore();
 };
 
 

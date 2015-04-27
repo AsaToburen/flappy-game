@@ -3,7 +3,14 @@ html, body {
   padding: 0;
   height: 100%; }
 
-canvas#main-canvas {
+canvas#main-canvas, div#overlay {
   width: 100%;
-  height: 100%;
-  background-image: url('../images/pipes_bg.jpg'); }
+  height: 100%; }
+
+div#overlay {
+  background-image: url('../images/landscape_bg.jpg');
+  background-size: cover;
+  position: absolute;
+  z-index: -5;
+  top: 0;
+  left: 0; }
