@@ -1,4 +1,5 @@
 var pipe = require('../entities/pipe');
+var goal = require('../entities/goal');
 
 var PipeSystem = function(entities) {
   this.entities = entities;
@@ -35,7 +36,7 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
 
-    this.entities.push(new pipe.Pipe(position, size));
+    this.entities.push(new pipe.Pipe(position, size), new goal.Goal(position));
 
     var height = 1 - gapPosition - 0.2 / 2;
     var position = {
@@ -48,41 +49,8 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
     this.entities.push(new pipe.Pipe(position, size));
+
 };
 
 exports.PipeSystem = PipeSystem;
 
-
-//PipeSystem.prototype.tick = function() {
-//
-//  var right = 0.5 * this.canvas.width / this.canvas.height;
-//  var gapPosition = 0.4 + Math.random() * 0.2;
-//
-//  var height = gapPosition - 0.2 / 2;
-//
-//  var position = {
-//    x: right + 0.15 / 2,
-//    y: height / 2
-//  };
-//
-//  var size = {
-//    x: 0.15,
-//    y: height
-//  };
-//
-//  this.entities.push(new pipe.Pipe(position, size));
-//
-//  var height = 1 - gapPosition - 0.2 / 2;
-//  var position = {
-//    x: right + 0.15 / 2,
-//    y: 1 - height / 2
-//  };
-//
-//  var size = {
-//    x: 0.15,
-//    y: height
-//  };
-//  this.entities.push(new pipe.Pipe(position, size));
-//};
-//
-//exports.PipeSystem = PipeSystem;
