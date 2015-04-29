@@ -6,6 +6,6 @@ var clamp = function(value, low, high) {
         return high;
     }
     return value;
-}
+};
 
 exports.clamp = clamp;

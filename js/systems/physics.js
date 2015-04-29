@@ -13,7 +13,6 @@ PhysicsSystem.prototype.run = function() {
 };
 
 PhysicsSystem.prototype.pause = function() {
-  // Stop the update loop
   if (this.interval != null) {
     window.clearInterval(this.interval);
     this.interval = null;

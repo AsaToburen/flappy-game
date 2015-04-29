@@ -1,5 +1,6 @@
 var pipe = require('../entities/pipe');
 var goal = require('../entities/goal');
+var endGoal = require('../entities/endGoal');
 
 var PipeSystem = function(entities) {
   this.entities = entities;
@@ -8,11 +9,11 @@ var PipeSystem = function(entities) {
 };
 
 PipeSystem.prototype.pause = function() {
-    // Stop the update loop
-    if (this.interval != null) {
-        window.clearInterval(this.interval);
-        this.interval = null;
-    }
+  // Stop the update loop
+  if (this.interval != null) {
+    window.clearInterval(this.interval);
+    this.interval = null;
+  }
 };
 
 PipeSystem.prototype.run = function() {
@@ -22,42 +23,53 @@ PipeSystem.prototype.run = function() {
 };
 
 PipeSystem.prototype.tick = function() {
-    var right = 0.5 * this.canvas.width / this.canvas.height;
-    var gapPosition = 0.4 + Math.random() * 0.2;
+  var right = 0.5 * this.canvas.width / this.canvas.height;
+  var gapPosition = 0.4 + Math.random() * 0.2;
 
-    var height = gapPosition - 0.15 / 2;
-    var position = {
-        x: right + 0.15 / 2,
-        y: height / 2
-    };
+  var height = gapPosition - 0.15 / 2;
+  var position = {
+    x: right + 0.15 / 2,
+    y: height / 2
+  };
 
-    var size = {
-        x: 0.15,
-        y: height
-    };
+  var size = {
+    x: 0.15,
+    y: height
+  };
 
-    this.entities.push(new pipe.Pipe(position, size));
+  this.entities.push(new pipe.Pipe(position, size));
 
-    var height = 1 - gapPosition - 0.2 / 2;
-    var position = {
-        x: right + 0.15 / 2,
-        y: 1 - height / 2
-    };
+  var height = 1 - gapPosition - 0.2 / 2;
+  var position = {
+    x: right + 0.15 / 2,
+    y: 1 - height / 2
+  };
 
-    var size = {
-        x: 0.15,
-        y: height
-    };
-    this.entities.push(new pipe.Pipe(position, size));
+  var size = {
+    x: 0.15,
+    y: height
+  };
+  
+  this.entities.push(new pipe.Pipe(position, size));
 
-    var position = {
-        x: (right + 0.15 / 2) + .01,
-        y: 1
-    };
+  var position = {
+    x: right + 0.15,
+    y: 1
+  };
 
-    this.entities.push(new goal.Goal(position));
+  var size = {
+    x: 0.01,
+    y: 1
+  };
+
+  this.entities.push(new goal.Goal(position, size));
 
 };
 
-exports.PipeSystem = PipeSystem;
 
+
+
+
+
+
+exports.PipeSystem = PipeSystem;

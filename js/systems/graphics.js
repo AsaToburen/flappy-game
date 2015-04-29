@@ -26,6 +26,8 @@ GraphicsSystem.prototype.tick = function() {
         this.canvas.height = this.canvas.offsetHeight;
     }
 
+
+    //every tick 1/60 clearing all rectangles off canvas and redrawing them...
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Rendering goes here
@@ -38,7 +40,6 @@ GraphicsSystem.prototype.tick = function() {
         if (!'graphics' in entity.components) {
             continue;
         }
-
         entity.components.graphics.draw(this.context);
     }
 

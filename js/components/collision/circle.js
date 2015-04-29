@@ -44,7 +44,6 @@ CircleCollisionComponent.prototype.collideRect = function(entity) {
                                    positionB.y + sizeB.y / 2)
     };
 
-
     var radiusA = this.radius;
 
     var diff = {x: positionA.x - closest.x,

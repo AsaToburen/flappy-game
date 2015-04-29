@@ -3,23 +3,29 @@ var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
 
 var Bird = function() {
-    var physics = new physicsComponent.PhysicsComponent(this);
-    physics.position.y = 0.5;
-    physics.acceleration.y = -2;
+  var physics = new physicsComponent.PhysicsComponent(this);
+  physics.position.y = 0.5;
+  physics.acceleration.y = -2;
 
-    var graphics = new graphicsComponent.BirdGraphicsComponent(this);
-    var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
-    collision.onCollision = this.onCollision.bind(this);
+  var graphics = new graphicsComponent.BirdGraphicsComponent(this);
+  var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
+  collision.onCollision = this.onCollision.bind(this);
 
-    this.components = {
-        physics: physics,
-        graphics: graphics,
-        collision: collision
-    };
+  this.components = {
+    physics: physics,
+    graphics: graphics,
+    collision: collision
+  };
 };
 
 Bird.prototype.onCollision = function(entity) {
-    console.log("Bird collided with entity:", entity);
+  console.log("Bird collided with entity:", entity);
+  console.log(entity.components.physics.position);
+  console.log(this.components.physics.position);
 };
+
+setTimeout(function() {
+  debugger;
+}, 10000);
 
 exports.Bird = Bird;

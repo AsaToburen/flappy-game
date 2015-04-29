@@ -1,6 +1,6 @@
 var collisionComponent = require("./rect");
-var GoalCollisionComponent = function(entity) {
-    collisionComponent.RectCollisionComponent.call(this, entity);
+var GoalCollisionComponent = function(entity, size) {
+    collisionComponent.RectCollisionComponent.call(this, entity, size);
 };
 
 GoalCollisionComponent.prototype = Object.create(

@@ -1,5 +1,7 @@
 var CollisionSystem = function(entities) {
   this.entities = entities;
+
+  console.log(entities);
 };
 
 CollisionSystem.prototype.tick = function() {

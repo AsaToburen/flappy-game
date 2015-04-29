@@ -1,4 +1,5 @@
 var collisionComponent = require("./rect");
+
 var PipeCollisionComponent = function(entity, size) {
     collisionComponent.RectCollisionComponent.call(this, entity, size);
 };
