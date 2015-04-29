@@ -5,7 +5,6 @@ var Counter = function() {
 
     var graphics = new graphicsComponent.CounterGraphicsComponent(this);
    
-
     this.components = {
         graphics: graphics
     };

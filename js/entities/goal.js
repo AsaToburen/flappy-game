@@ -2,7 +2,7 @@ var graphicsComponent = require("../components/graphics/goal");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/goal");
 
-var Goal = function(position, size) {
+var Goal = function(position) {
 
   console.log('Creating Goal entity');
 
@@ -10,8 +10,7 @@ var Goal = function(position, size) {
   var graphics = new graphicsComponent.GoalGraphicsComponent(this);
   var collision = new collisionComponent.GoalCollisionComponent(this);
 
-  //physics.position = position;
-  physics.position = position + .2;
+  physics.position = position;
   physics.velocity.x = -0.4;
 
   this.components = {

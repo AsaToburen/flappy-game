@@ -36,7 +36,7 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
 
-    this.entities.push(new pipe.Pipe(position, size), new goal.Goal(position));
+    this.entities.push(new pipe.Pipe(position, size));
 
     var height = 1 - gapPosition - 0.2 / 2;
     var position = {
@@ -49,6 +49,13 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
     this.entities.push(new pipe.Pipe(position, size));
+
+    var position = {
+        x: (right + 0.15 / 2) + .01,
+        y: 1
+    };
+
+    this.entities.push(new goal.Goal(position));
 
 };
 

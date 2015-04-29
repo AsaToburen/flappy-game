@@ -176,8 +176,8 @@ GoalGraphicsComponent.prototype.draw = function(context) {
   context.save();
   context.translate(position.x, position.y);
   context.beginPath();
-  context.moveTo(0, 1);
-  context.lineTo(-1, 2);
+  //context.moveTo(0, 0);
+  //context.lineTo(0, 1);
   context.strokeStyle = '#000';
   context.stroke();
   context.restore();
@@ -265,7 +265,7 @@ var graphicsComponent = require("../components/graphics/goal");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/goal");
 
-var Goal = function(position, size) {
+var Goal = function(position) {
 
   console.log('Creating Goal entity');
 
@@ -273,8 +273,7 @@ var Goal = function(position, size) {
   var graphics = new graphicsComponent.GoalGraphicsComponent(this);
   var collision = new collisionComponent.GoalCollisionComponent(this);
 
-  //physics.position = position;
-  physics.position = position + .2;
+  physics.position = position;
   physics.velocity.x = -0.4;
 
   this.components = {
@@ -528,7 +527,7 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
 
-    this.entities.push(new pipe.Pipe(position, size), new goal.Goal(position));
+    this.entities.push(new pipe.Pipe(position, size));
 
     var height = 1 - gapPosition - 0.2 / 2;
     var position = {
@@ -541,6 +540,13 @@ PipeSystem.prototype.tick = function() {
         y: height
     };
     this.entities.push(new pipe.Pipe(position, size));
+
+    var position = {
+        x: (right + 0.15 / 2) + .01,
+        y: 1
+    };
+
+    this.entities.push(new goal.Goal(position));
 
 };
 
