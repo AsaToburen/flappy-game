@@ -8,8 +8,8 @@ GoalGraphicsComponent.prototype.draw = function(context) {
   context.save();
   context.translate(position.x, position.y);
   context.beginPath();
-  //context.moveTo(0, 0);
-  //context.lineTo(0, 1);
+  context.moveTo(position.x, position.y);
+  context.lineTo(position.x, -position.y);
   context.strokeStyle = '#000';
   context.stroke();
   context.restore();
