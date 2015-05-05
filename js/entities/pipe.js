@@ -21,6 +21,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
+  console.log(this);
+  console.log(entity);
 // console.log(entity);
 //   console.log(typeof(this));
 // }

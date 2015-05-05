@@ -49,7 +49,7 @@ PipeSystem.prototype.tick = function() {
     x: 0.15,
     y: height
   };
-  
+
   this.entities.push(new pipe.Pipe(position, size));
 
   var position = {
@@ -66,7 +66,6 @@ PipeSystem.prototype.tick = function() {
 
   for (var i = 0; i < this.entities.length; i++) {
     var entity = this.entities[i];
-    console.log(entity.remove);
 
     if (entity.remove) {
       this.entities.splice(i, 1);

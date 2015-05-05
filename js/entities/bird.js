@@ -1,6 +1,7 @@
 var physicsComponent = require("../components/physics/physics");
 var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
+var pipe = require("./pipe.js");
 
 var Bird = function() {
   var physics = new physicsComponent.PhysicsComponent(this);
@@ -19,9 +20,10 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-  console.log("Bird collided with entity:", entity);
-  console.log(entity.components.physics.position);
-  console.log(this.components.physics.position);
+  console.log(entity);
+  //console.log("Bird collided with entity:", entity);
+  //console.log(entity instanceof);
+  //this.reset = true;
 };
 
 setTimeout(function() {

@@ -36,12 +36,7 @@ var endGoal = function() {
 endGoal.prototype.onCollision = function(entity) {
   
   this.remove = true;
-  console.log(this);
-  console.log(this.remove);
- 
-  if (typeof(this) == Object){
-    console.log('equal to object');
-  }
+
   console.log('EndGoal collision !!!!!!');
 };
 

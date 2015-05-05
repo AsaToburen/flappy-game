@@ -192,14 +192,12 @@ var CounterGraphicsComponent = function(entity) {
 };
 
 CounterGraphicsComponent.prototype.draw = function(context) {
-    //var position = this.entity.components.physics.position;
 
   context.save();
   context.translate(0, 0);
   context.font = '48px serif';
   context.fillText('Score: ' + this.entity.scoreVariable, 0, 0);
   context.restore();
-
 
 };
 
@@ -305,6 +303,7 @@ exports.PhysicsComponent = PhysicsComponent;
 var physicsComponent = require("../components/physics/physics");
 var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
+var pipe = require("./pipe.js");
 
 var Bird = function() {
   var physics = new physicsComponent.PhysicsComponent(this);
@@ -323,9 +322,10 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-  console.log("Bird collided with entity:", entity);
-  console.log(entity.components.physics.position);
-  console.log(this.components.physics.position);
+  console.log(entity);
+  //console.log("Bird collided with entity:", entity);
+  //console.log(entity instanceof);
+  //this.reset = true;
 };
 
 setTimeout(function() {
@@ -334,7 +334,7 @@ setTimeout(function() {
 
 exports.Bird = Bird;
 
-},{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12}],14:[function(require,module,exports){
+},{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12,"./pipe.js":17}],14:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/counter");
 var physicsComponent = require("../components/physics/physics");
 
@@ -389,12 +389,7 @@ var endGoal = function() {
 endGoal.prototype.onCollision = function(entity) {
   
   this.remove = true;
-  console.log(this);
-  console.log(this.remove);
- 
-  if (typeof(this) == Object){
-    console.log('equal to object');
-  }
+
   console.log('EndGoal collision !!!!!!');
 };
 
@@ -454,6 +449,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
+  console.log(this);
+  console.log(entity);
 // console.log(entity);
 //   console.log(typeof(this));
 // }
@@ -689,7 +686,7 @@ PipeSystem.prototype.tick = function() {
     x: 0.15,
     y: height
   };
-  
+
   this.entities.push(new pipe.Pipe(position, size));
 
   var position = {
@@ -706,7 +703,6 @@ PipeSystem.prototype.tick = function() {
 
   for (var i = 0; i < this.entities.length; i++) {
     var entity = this.entities[i];
-    console.log(entity.remove);
 
     if (entity.remove) {
       this.entities.splice(i, 1);
