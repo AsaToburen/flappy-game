@@ -20,4 +20,13 @@ var Pipe = function(position, size) {
   };
 };
 
+Pipe.prototype.onCollision = function(entity) {
+// console.log(entity);
+//   console.log(typeof(this));
+// }
+// if (typeof(this) == 'endGoal') {
+//   this.flag = true;
+// }
+};
+
 exports.Pipe = Pipe;

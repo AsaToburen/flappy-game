@@ -64,11 +64,15 @@ PipeSystem.prototype.tick = function() {
 
   this.entities.push(new goal.Goal(position, size));
 
+  for (var i = 0; i < this.entities.length; i++) {
+    var entity = this.entities[i];
+    console.log(entity.remove);
+
+    if (entity.remove) {
+      this.entities.splice(i, 1);
+    }
+  }
 };
-
-
-
-
 
 
 

@@ -26,6 +26,6 @@ Bird.prototype.onCollision = function(entity) {
 
 setTimeout(function() {
   debugger;
-}, 10000);
+}, 15000);
 
 exports.Bird = Bird;

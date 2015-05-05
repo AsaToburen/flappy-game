@@ -1,5 +1,6 @@
 var graphicsComponent = require("../components/graphics/counter");
-var collisionComponent = require("../components/collision/goal");
+var physicsComponent = require("../components/physics/physics");
+
 
 var Counter = function() {
 

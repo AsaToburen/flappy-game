@@ -2,7 +2,7 @@ var graphicsComponent = require("../components/graphics/endGoal");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/endGoal");
 var pipeSystem = require("../systems/pipes.js");
-
+var pipe = require("./pipe.js");
 
 var endGoal = function() {
 
@@ -34,9 +34,20 @@ var endGoal = function() {
 };
 
 endGoal.prototype.onCollision = function(entity) {
-  //console.log(pipeSystem);  //does not work
+  
+  this.remove = true;
+  console.log(this);
+  console.log(this.remove);
+ 
+  if (typeof(this) == Object){
+    console.log('equal to object');
+  }
   console.log('EndGoal collision !!!!!!');
 };
+
+
+
+
 
 
 exports.endGoal = endGoal;

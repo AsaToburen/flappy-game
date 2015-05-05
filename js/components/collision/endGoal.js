@@ -1,6 +1,5 @@
 var collisionComponent = require("./rect");
 var pipeSystem = require('../../systems/pipes.js');
-var game = require('../../flappy_bird.js');
 
 
 var endGoalCollisionComponent = function(entity, size) {
@@ -12,7 +11,6 @@ endGoalCollisionComponent.prototype = Object.create(
 );
 
 endGoalCollisionComponent.prototype.onCollision = function(object) {
-  console.log('EndGoal Collision');
 };
 
 exports.endGoalCollisionComponent = endGoalCollisionComponent;
