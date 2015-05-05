@@ -322,10 +322,10 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-  console.log(entity);
-  //console.log("Bird collided with entity:", entity);
-  //console.log(entity instanceof);
-  //this.reset = true;
+  
+  this.crash = true;
+  
+
 };
 
 setTimeout(function() {
@@ -390,7 +390,6 @@ endGoal.prototype.onCollision = function(entity) {
   
   this.remove = true;
 
-  console.log('EndGoal collision !!!!!!');
 };
 
 
@@ -407,11 +406,11 @@ var collisionComponent = require("../components/collision/goal");
 
 var Goal = function(position, size) {
 
-  console.log('Creating Goal entity');
 
   var physics = new physicsComponent.PhysicsComponent(this);
   var graphics = new graphicsComponent.GoalGraphicsComponent(this, size);
   var collision = new collisionComponent.GoalCollisionComponent(this, size);
+  collision.onCollision = this.onCollision.bind(this);
 
   physics.position = position;
   physics.velocity.x = -0.4;
@@ -423,6 +422,11 @@ var Goal = function(position, size) {
   };
 };
 
+Goal.prototype.onCollision = function(entity) {
+  
+   
+};
+
 exports.Goal = Goal;
 
 },{"../components/collision/goal":4,"../components/graphics/goal":10,"../components/physics/physics":12}],17:[function(require,module,exports){
@@ -431,8 +435,6 @@ var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/pipe");
 
 var Pipe = function(position, size) {
-
-  console.log('Creating Pipe entity');
 
   var physics = new physicsComponent.PhysicsComponent(this);
   var graphics = new graphicsComponent.PipeGraphicsComponent(this, size);
@@ -449,14 +451,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-  console.log(this);
-  console.log(entity);
-// console.log(entity);
-//   console.log(typeof(this));
-// }
-// if (typeof(this) == 'endGoal') {
-//   this.flag = true;
-// }
+  console.log(entity.crash);
+
 };
 
 exports.Pipe = Pipe;
@@ -520,59 +516,59 @@ exports.CollisionSystem = CollisionSystem;
 
 },{}],20:[function(require,module,exports){
 var GraphicsSystem = function(entities) {
-    this.entities = entities;
-    // Canvas is where we draw
-    this.canvas = document.getElementById('main-canvas');
-    // Context is what we draw to
-    this.context = this.canvas.getContext('2d');
+  this.entities = entities;
+  // Canvas is where we draw
+  this.canvas = document.getElementById('main-canvas');
+  // Context is what we draw to
+  this.context = this.canvas.getContext('2d');
 
-    this.paused = true;
+  this.paused = true;
 };
 
 GraphicsSystem.prototype.run = function() {
-    // Run the render loop
-    window.requestAnimationFrame(this.tick.bind(this));
-    this.paused = false;
+  // Run the render loop
+  window.requestAnimationFrame(this.tick.bind(this));
+  this.paused = false;
 };
 
 GraphicsSystem.prototype.pause = function() {
-    this.paused = true;
+  this.paused = true;
 };
 
 GraphicsSystem.prototype.tick = function() {
-    // Set the canvas to the correct size if the window is resized
-    if (this.canvas.width != this.canvas.offsetWidth ||
-        this.canvas.height != this.canvas.offsetHeight) {
-        this.canvas.width = this.canvas.offsetWidth;
-        this.canvas.height = this.canvas.offsetHeight;
+  // Set the canvas to the correct size if the window is resized
+  if (this.canvas.width != this.canvas.offsetWidth ||
+    this.canvas.height != this.canvas.offsetHeight) {
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight;
+  }
+
+  //every tick 1/60 clearing all rectangles off canvas and redrawing them...
+  this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+  // Rendering goes here
+  this.context.save();
+  this.context.translate(this.canvas.width / 2, this.canvas.height);
+  this.context.scale(this.canvas.height, -this.canvas.height);
+
+  for (var i = 0; i < this.entities.length; i++) {
+    var entity = this.entities[i];
+    if (!'graphics' in entity.components) {
+      continue;
     }
+    entity.components.graphics.draw(this.context);
+  }
 
+  this.context.restore();
 
-    //every tick 1/60 clearing all rectangles off canvas and redrawing them...
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // Rendering goes here
-    this.context.save();
-    this.context.translate(this.canvas.width / 2, this.canvas.height);
-    this.context.scale(this.canvas.height, -this.canvas.height);
-
-    for (var i=0; i<this.entities.length; i++) {
-        var entity = this.entities[i];
-        if (!'graphics' in entity.components) {
-            continue;
-        }
-        entity.components.graphics.draw(this.context);
-    }
-
-    this.context.restore();
-
-    if (!this.paused) {
-        // Continue the render loop
-        window.requestAnimationFrame(this.tick.bind(this));
-    }
+  if (!this.paused) {
+    // Continue the render loop
+    window.requestAnimationFrame(this.tick.bind(this));
+  }
 };
 
 exports.GraphicsSystem = GraphicsSystem;
+
 },{}],21:[function(require,module,exports){
 var InputSystem = function(entities) {
 
@@ -636,6 +632,7 @@ exports.PhysicsSystem = PhysicsSystem;
 
 },{"./collision":19}],23:[function(require,module,exports){
 var pipe = require('../entities/pipe');
+var bird = require('../entities/bird');
 var goal = require('../entities/goal');
 var endGoal = require('../entities/endGoal');
 
@@ -706,6 +703,8 @@ PipeSystem.prototype.tick = function() {
 
     if (entity.remove) {
       this.entities.splice(i, 1);
+    } else if (entity.crash) {
+      this.entities = [];
     }
   }
 };
@@ -714,7 +713,7 @@ PipeSystem.prototype.tick = function() {
 
 exports.PipeSystem = PipeSystem;
 
-},{"../entities/endGoal":15,"../entities/goal":16,"../entities/pipe":17}],24:[function(require,module,exports){
+},{"../entities/bird":13,"../entities/endGoal":15,"../entities/goal":16,"../entities/pipe":17}],24:[function(require,module,exports){
 var clamp = function(value, low, high) {
     if (value < low) {
         return low;

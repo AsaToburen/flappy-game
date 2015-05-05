@@ -4,8 +4,6 @@ var collisionComponent = require("../components/collision/pipe");
 
 var Pipe = function(position, size) {
 
-  console.log('Creating Pipe entity');
-
   var physics = new physicsComponent.PhysicsComponent(this);
   var graphics = new graphicsComponent.PipeGraphicsComponent(this, size);
   var collision = new collisionComponent.PipeCollisionComponent(this, size);
@@ -21,14 +19,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-  console.log(this);
-  console.log(entity);
-// console.log(entity);
-//   console.log(typeof(this));
-// }
-// if (typeof(this) == 'endGoal') {
-//   this.flag = true;
-// }
+  console.log(entity.crash);
+
 };
 
 exports.Pipe = Pipe;

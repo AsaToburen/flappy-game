@@ -1,4 +1,5 @@
 var pipe = require('../entities/pipe');
+var bird = require('../entities/bird');
 var goal = require('../entities/goal');
 var endGoal = require('../entities/endGoal');
 
@@ -69,6 +70,8 @@ PipeSystem.prototype.tick = function() {
 
     if (entity.remove) {
       this.entities.splice(i, 1);
+    } else if (entity.crash) {
+      this.entities = [];
     }
   }
 };

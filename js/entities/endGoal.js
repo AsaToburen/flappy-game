@@ -37,7 +37,6 @@ endGoal.prototype.onCollision = function(entity) {
   
   this.remove = true;
 
-  console.log('EndGoal collision !!!!!!');
 };
 
 

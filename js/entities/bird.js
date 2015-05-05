@@ -20,12 +20,10 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-  console.log(entity);
+  
+  this.crash = true;
+  
 
-  //this.crash = true;
-  //console.log("Bird collided with entity:", entity);
-  //console.log(entity instanceof);
-  //this.reset = true;
 };
 
 setTimeout(function() {

@@ -4,11 +4,11 @@ var collisionComponent = require("../components/collision/goal");
 
 var Goal = function(position, size) {
 
-  console.log('Creating Goal entity');
 
   var physics = new physicsComponent.PhysicsComponent(this);
   var graphics = new graphicsComponent.GoalGraphicsComponent(this, size);
   var collision = new collisionComponent.GoalCollisionComponent(this, size);
+  collision.onCollision = this.onCollision.bind(this);
 
   physics.position = position;
   physics.velocity.x = -0.4;
@@ -18,6 +18,11 @@ var Goal = function(position, size) {
     physics: physics,
     collision: collision
   };
+};
+
+Goal.prototype.onCollision = function(entity) {
+  
+   
 };
 
 exports.Goal = Goal;
