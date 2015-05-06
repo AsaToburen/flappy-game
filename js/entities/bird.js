@@ -2,6 +2,7 @@ var physicsComponent = require("../components/physics/physics");
 var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
 var pipe = require("./pipe.js");
+var goal = require("./goal.js");
 
 var Bird = function() {
   var physics = new physicsComponent.PhysicsComponent(this);
@@ -21,7 +22,11 @@ var Bird = function() {
 
 Bird.prototype.onCollision = function(entity) {
   
+  console.log(entity);
+
+  //console.log(entity instanceof goal);
   this.crash = true;
+  
 
 };
 

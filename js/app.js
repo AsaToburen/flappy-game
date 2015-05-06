@@ -304,6 +304,7 @@ var physicsComponent = require("../components/physics/physics");
 var graphicsComponent = require("../components/graphics/bird");
 var collisionComponent = require("../components/collision/circle");
 var pipe = require("./pipe.js");
+var goal = require("./goal.js");
 
 var Bird = function() {
   var physics = new physicsComponent.PhysicsComponent(this);
@@ -323,7 +324,11 @@ var Bird = function() {
 
 Bird.prototype.onCollision = function(entity) {
   
+  console.log(entity);
+
+  //console.log(entity instanceof goal);
   this.crash = true;
+  
 
 };
 
@@ -333,7 +338,7 @@ setTimeout(function() {
 
 exports.Bird = Bird;
 
-},{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12,"./pipe.js":17}],14:[function(require,module,exports){
+},{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12,"./goal.js":16,"./pipe.js":17}],14:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/counter");
 var goal = require("./goal.js");
 
