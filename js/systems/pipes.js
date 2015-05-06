@@ -2,8 +2,9 @@ var pipe = require('../entities/pipe');
 var goal = require('../entities/goal');
 var endGoal = require('../entities/endGoal');
 
-var PipeSystem = function(entities) {
-  this.entities = entities;
+var PipeSystem = function(main) {
+  this.main = main;
+  this.entities = main.entities;
   this.canvas = document.getElementById('main-canvas');
   this.interval = null;
 };
@@ -17,12 +18,10 @@ PipeSystem.prototype.pause = function() {
 };
 
 PipeSystem.prototype.run = function() {
-
-  this.interval = window.setInterval(this.tick.bind(this),
-    2000 * 1);
+   this.interval = window.setInterval(this.tick.bind(this), 2000 * 1);
 };
 
-PipeSystem.prototype.tick = function() {
+ PipeSystem.prototype.tick = function() {
   var right = 0.5 * this.canvas.width / this.canvas.height;
   var gapPosition = 0.4 + Math.random() * 0.2;
 

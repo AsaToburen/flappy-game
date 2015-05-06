@@ -3,7 +3,7 @@ var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/goal");
 
 var Goal = function(position, size) {
-
+    this.type = 'goal';
 
   var physics = new physicsComponent.PhysicsComponent(this);
   var graphics = new graphicsComponent.GoalGraphicsComponent(this, size);

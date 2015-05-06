@@ -9,6 +9,11 @@ CollisionSystem.prototype.tick = function() {
       continue;
     }
 
+    if (entityA.remove) {
+      this.entities.splice(i, 1);
+      continue;
+    }
+
     for (var j = i + 1; j < this.entities.length; j++) {
       var entityB = this.entities[j];
       if (!'collision' in entityB.components) {
