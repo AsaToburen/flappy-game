@@ -194,7 +194,7 @@ var CounterGraphicsComponent = function(entity) {
 CounterGraphicsComponent.prototype.draw = function(context) {
 
   context.save();
-  context.translate(0, 0);
+  context.translate(-.95, .95);
   context.font = '48px serif';
   context.fillText('Score: ' + this.entity.scoreVariable, 0, 0);
   context.restore();
@@ -324,7 +324,6 @@ var Bird = function() {
 Bird.prototype.onCollision = function(entity) {
   
   this.crash = true;
-  
 
 };
 
@@ -336,8 +335,7 @@ exports.Bird = Bird;
 
 },{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12,"./pipe.js":17}],14:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/counter");
-var physicsComponent = require("../components/physics/physics");
-
+var goal = require("./goal.js");
 
 var Counter = function() {
 
@@ -350,7 +348,7 @@ var Counter = function() {
 
 
 exports.Counter = Counter;
-},{"../components/graphics/counter":8,"../components/physics/physics":12}],15:[function(require,module,exports){
+},{"../components/graphics/counter":8,"./goal.js":16}],15:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/endGoal");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/endGoal");
@@ -423,7 +421,6 @@ var Goal = function(position, size) {
 };
 
 Goal.prototype.onCollision = function(entity) {
-  
    
 };
 
@@ -451,7 +448,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-  console.log(entity.crash);
+  
+  //console.log(entity.crash);
 
 };
 
@@ -486,7 +484,6 @@ exports.FlappyBird = FlappyBird;
 },{"./entities/bird":13,"./entities/counter":14,"./entities/endGoal":15,"./systems/graphics":20,"./systems/input":21,"./systems/physics":22,"./systems/pipes":23}],19:[function(require,module,exports){
 var CollisionSystem = function(entities) {
   this.entities = entities;
-  console.log(entities);
 };
 
 CollisionSystem.prototype.tick = function() {
@@ -632,7 +629,6 @@ exports.PhysicsSystem = PhysicsSystem;
 
 },{"./collision":19}],23:[function(require,module,exports){
 var pipe = require('../entities/pipe');
-var bird = require('../entities/bird');
 var goal = require('../entities/goal');
 var endGoal = require('../entities/endGoal');
 
@@ -703,8 +699,6 @@ PipeSystem.prototype.tick = function() {
 
     if (entity.remove) {
       this.entities.splice(i, 1);
-    } else if (entity.crash) {
-      this.entities = [];
     }
   }
 };
@@ -713,7 +707,7 @@ PipeSystem.prototype.tick = function() {
 
 exports.PipeSystem = PipeSystem;
 
-},{"../entities/bird":13,"../entities/endGoal":15,"../entities/goal":16,"../entities/pipe":17}],24:[function(require,module,exports){
+},{"../entities/endGoal":15,"../entities/goal":16,"../entities/pipe":17}],24:[function(require,module,exports){
 var clamp = function(value, low, high) {
     if (value < low) {
         return low;

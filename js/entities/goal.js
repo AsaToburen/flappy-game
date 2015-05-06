@@ -21,7 +21,6 @@ var Goal = function(position, size) {
 };
 
 Goal.prototype.onCollision = function(entity) {
-  
    
 };
 

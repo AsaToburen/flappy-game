@@ -1,6 +1,5 @@
 var graphicsComponent = require("../components/graphics/counter");
-var physicsComponent = require("../components/physics/physics");
-
+var goal = require("./goal.js");
 
 var Counter = function() {
 

@@ -22,7 +22,6 @@ var Bird = function() {
 Bird.prototype.onCollision = function(entity) {
   
   this.crash = true;
-  
 
 };
 

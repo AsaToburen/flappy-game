@@ -19,7 +19,8 @@ var Pipe = function(position, size) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-  console.log(entity.crash);
+  
+  //console.log(entity.crash);
 
 };
 
