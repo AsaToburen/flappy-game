@@ -8,7 +8,7 @@ var counter = require('./entities/counter');
 
 var FlappyBird = function() {
 
-  this.entities = [new bird.Bird(this), new endGoal.endGoal(), new counter.Counter(this)];
+  this.entities = [new bird.Bird(this), new endGoal.endGoal(), new counter.Counter()];
   this.graphics = new graphicsSystem.GraphicsSystem(this);
   this.physics = new physicsSystem.PhysicsSystem(this);
   this.input = new inputSystem.InputSystem(this);

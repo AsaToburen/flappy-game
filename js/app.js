@@ -257,15 +257,31 @@ var PipeGraphicsComponent = function(entity, size) {
   this.size = size;
 };
 
+var isEven = function(value) {
+  if (value % 2 == 0)
+    return true;
+  else
+    return false;
+};
+
+var madePipe = 0;
+
 PipeGraphicsComponent.prototype.draw = function(context) {
   var position = this.entity.components.physics.position;
-
   context.save();
   context.translate(position.x, position.y);
   var img = new Image();
   img.src = "./images/pipe.png";
+  if (isEven(madePipe)) {
+    context.scale(1, -1);
+  } else {
+    context.scale(1, 1);
+  }
+  madePipe++;
+
   context.drawImage(img, -this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
   context.restore();
+ 
 };
 
 
@@ -346,19 +362,27 @@ exports.Bird = Bird;
 
 },{"../components/collision/circle":2,"../components/graphics/bird":7,"../components/physics/physics":12,"./goal.js":16,"./pipe.js":17}],14:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/counter");
+//var physicsComponent = require("../components/physics/physics");
+//var collisionComponent = require("../components/collision/counter");
+
 var goal = require("./goal.js");
 
 var Counter = function() {
 
-    var graphics = new graphicsComponent.CounterGraphicsComponent(this);
-   
-    this.components = {
-        graphics: graphics
-    };
+  var graphics = new graphicsComponent.CounterGraphicsComponent(this);
+  //var physics = new physicsComponent.PhysicsComponent(this);
+  //var collision = new collisionComponent.CollisionComponent(this);
+
+  this.components = {
+    graphics: graphics
+    //physics: physics
+   // collision: collision
+  };
 };
 
 
 exports.Counter = Counter;
+
 },{"../components/graphics/counter":8,"./goal.js":16}],15:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/endGoal");
 var physicsComponent = require("../components/physics/physics");
@@ -484,7 +508,7 @@ var counter = require('./entities/counter');
 
 var FlappyBird = function() {
 
-  this.entities = [new bird.Bird(this), new endGoal.endGoal(), new counter.Counter(this)];
+  this.entities = [new bird.Bird(this), new endGoal.endGoal(), new counter.Counter()];
   this.graphics = new graphicsSystem.GraphicsSystem(this);
   this.physics = new physicsSystem.PhysicsSystem(this);
   this.input = new inputSystem.InputSystem(this);
@@ -704,7 +728,6 @@ var PipeSystem = function(main) {
 };
 
 PipeSystem.prototype.pause = function() {
-  // Stop the update loop
   if (this.interval != null) {
     window.clearInterval(this.interval);
     this.interval = null;
@@ -712,10 +735,10 @@ PipeSystem.prototype.pause = function() {
 };
 
 PipeSystem.prototype.run = function() {
-   this.interval = window.setInterval(this.tick.bind(this), 2000 * 1);
+  this.interval = window.setInterval(this.tick.bind(this), 2000 * 1);
 };
 
- PipeSystem.prototype.tick = function() {
+PipeSystem.prototype.tick = function() {
   var right = 0.5 * this.canvas.width / this.canvas.height;
   var gapPosition = 0.4 + Math.random() * 0.2;
 
@@ -765,7 +788,6 @@ PipeSystem.prototype.run = function() {
     }
   }
 };
-
 
 
 exports.PipeSystem = PipeSystem;

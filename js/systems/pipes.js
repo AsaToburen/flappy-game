@@ -10,7 +10,6 @@ var PipeSystem = function(main) {
 };
 
 PipeSystem.prototype.pause = function() {
-  // Stop the update loop
   if (this.interval != null) {
     window.clearInterval(this.interval);
     this.interval = null;
@@ -18,10 +17,10 @@ PipeSystem.prototype.pause = function() {
 };
 
 PipeSystem.prototype.run = function() {
-   this.interval = window.setInterval(this.tick.bind(this), 2000 * 1);
+  this.interval = window.setInterval(this.tick.bind(this), 2000 * 1);
 };
 
- PipeSystem.prototype.tick = function() {
+PipeSystem.prototype.tick = function() {
   var right = 0.5 * this.canvas.width / this.canvas.height;
   var gapPosition = 0.4 + Math.random() * 0.2;
 
@@ -71,7 +70,6 @@ PipeSystem.prototype.run = function() {
     }
   }
 };
-
 
 
 exports.PipeSystem = PipeSystem;
