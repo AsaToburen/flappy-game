@@ -311,6 +311,7 @@ PhysicsComponent.prototype.update = function(delta) {
 
   this.position.x += this.velocity.x * delta;
   this.position.y += this.velocity.y * delta;
+  console.log(this);
 };
 
 exports.PhysicsComponent = PhysicsComponent;
@@ -508,12 +509,11 @@ var counter = require('./entities/counter');
 
 var FlappyBird = function() {
 
-  this.entities = [new bird.Bird(this), new endGoal.endGoal(), new counter.Counter()];
+  this.entities = [new bird.Bird(this), new counter.Counter(this), new endGoal.endGoal()];
   this.graphics = new graphicsSystem.GraphicsSystem(this);
   this.physics = new physicsSystem.PhysicsSystem(this);
   this.input = new inputSystem.InputSystem(this);
   this.pipes = new pipeSystem.PipeSystem(this);
-
   this.input.init();
 
   this.score = 0;
